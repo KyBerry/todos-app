@@ -1,19 +1,4 @@
-const todos = [{
-    text: 'Order cat food',
-    completed: false
-}, {
-    text: 'Clean kitchen',
-    completed: true
-}, {
-    text: 'Buy food',
-    completed: false
-}, {
-    text: 'Do work',
-    completed: false
-}, {
-    text: 'Exercise',
-    completed: true
-}];
+let todos = [];
 
 // 1. Setup a div contain for todos
 // 2. Setup filters (searchText) and wire up a new filter input to change it
@@ -23,6 +8,14 @@ const filters = {
     searchText: '',
     hideCompleted: false
 }
+
+const todoJSON = localStorage.getItem('todos');
+
+// Checking for existing data 
+if(todoJSON !== null){
+    todos = JSON.parse(todoJSON)
+}
+
 
 const renderTodos = function(todos, filters){
     const filteredTodos = todos.filter(function(todo){
@@ -66,6 +59,9 @@ document.querySelector('#add-new-todos').addEventListener('submit', function(e){
         text: e.target.elements.newTodo.value,
         completed: false
     })
+
+    localStorage.setItem('todos', JSON.stringify(todos))
+
     renderTodos(todos,filters);
     e.target.elements.newTodo.value = '';  
 })
