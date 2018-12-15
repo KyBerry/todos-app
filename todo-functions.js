@@ -33,11 +33,32 @@ const renderTodos = function(todos, filters){
     })
 }
 
+
+
+// 1. Setup a root div
+// 2. Setup and append a checkbox (set type attribute)
+// someNode.setAttribute('type', 'checkbox')
+// 3. Setup and append a span (set text)
+// 4. Setup and append a button (set text)
+
+
 // Get the DOM elements for an individual todo
 const generateTodoDOM = function(todo){
-        const p = document.createElement('p');
-        p.textContent = todo.text;
-        return p;
+        const todoEl = document.createElement('div');
+        const button = document.createElement('button');
+        const todoText = document.createElement('span');
+        const checkbox = document.createElement('input');
+        
+        // Setup todo checkbox
+        checkbox.setAttribute('type', 'checkbox');
+        todoEl.appendChild(checkbox)
+
+        // Setup todo checkbox
+        button.textContent = 'X';
+        todoText.textContent = todo.text;
+        todoEl.appendChild(todoText);
+        todoEl.appendChild(button);
+        return todoEl;
 }
 
 // Get the DOM elements for an individual note
