@@ -45,19 +45,22 @@ const renderTodos = function(todos, filters){
 // Get the DOM elements for an individual todo
 const generateTodoDOM = function(todo){
         const todoEl = document.createElement('div');
-        const button = document.createElement('button');
-        const todoText = document.createElement('span');
         const checkbox = document.createElement('input');
-        
+        const todoText = document.createElement('span');
+        const button = document.createElement('button');
+
         // Setup todo checkbox
         checkbox.setAttribute('type', 'checkbox');
         todoEl.appendChild(checkbox)
 
         // Setup todo checkbox
-        button.textContent = 'X';
         todoText.textContent = todo.text;
         todoEl.appendChild(todoText);
+
+        // Setup todo remove button
+        button.textContent = 'X';
         todoEl.appendChild(button);
+
         return todoEl;
 }
 
