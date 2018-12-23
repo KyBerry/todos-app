@@ -13,15 +13,19 @@ document.querySelector('#search-text').addEventListener('input', function(e){
 });
 
 document.querySelector('#add-new-todos').addEventListener('submit', function(e){
+    const text = e.target.elements.newTodo.value.trim();
+    debugger;
     e.preventDefault();
-    todos.push({
-        id: uuidv4(),
-        text: e.target.elements.newTodo.value,
-        completed: false
-    })
-    saveTodos(todos);
-    renderTodos(todos,filters);
-    e.target.elements.newTodo.value = '';  
+    if (text.length > 0){
+        todos.push({
+            id: uuidv4(),
+            text: text,
+            completed: false
+        });
+        saveTodos(todos);
+        renderTodos(todos,filters);
+        e.target.elements.newTodo.value = '';  
+    };
 });
 
 document.querySelector('#hide-complete').addEventListener('change', function(e){
