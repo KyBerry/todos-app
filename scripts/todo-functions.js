@@ -1,11 +1,7 @@
 // Fetch existing todos from localStorage
 const getSavedTodos = () => {
     const todoJSON = localStorage.getItem('todos');
-    if(todoJSON !== null){
-        return JSON.parse(todoJSON);
-    } else {
-        return [];
-    }
+    return todoJSON !== null ? JSON.parse(todoJSON) : [];
 }
 
 // Save todos to localStorage
@@ -44,7 +40,7 @@ const renderTodos = (todos, filters) => {
 
     // Add a p for each todo above (use text value
     if (filteredTodos.length > 0){
-        filteredTodos.forEach(function(todo){
+        filteredTodos.forEach((todo) => {
             todoEl.appendChild(generateTodoDOM(todo));
         });        
     } else {
@@ -56,7 +52,7 @@ const renderTodos = (todos, filters) => {
 };
 
 // Get the DOM elements for an individual todo
-const generateTodoDOM = function(todo){
+const generateTodoDOM = (todo) => {
         const todoEl = document.createElement('label');
         const containerEl = document.createElement('div')
         const checkbox = document.createElement('input');
@@ -68,7 +64,7 @@ const generateTodoDOM = function(todo){
         checkbox.setAttribute('type', 'checkbox');
         checkbox.checked = todo.completed;
         containerEl.appendChild(checkbox);
-        checkbox.addEventListener('change', function(){
+        checkbox.addEventListener('change', () => {
             toggleTodo(todo.id);
             saveTodos(todos);
             renderTodos(todos, filters);
@@ -88,7 +84,7 @@ const generateTodoDOM = function(todo){
         button.textContent = 'REMOVE';
         button.classList.add('button', 'button--text');
         todoEl.appendChild(button);
-        button.addEventListener('click',function(){
+        button.addEventListener('click', () => {
             removeTodo(todo.id);
             saveTodos(todos);
             renderTodos(todos, filters);
@@ -100,7 +96,7 @@ const generateTodoDOM = function(todo){
 };
 
 // Get the DOM elements for an individual note
-const generateSummaryDOM = function(incompleteTodos){
+const generateSummaryDOM = (incompleteTodos) => {
     const todosLeft = document.createElement('h2');
     const plural = incompleteTodos.length === 1 ? '' : 'S';
     todosLeft.classList.add('list-title');
