@@ -7,12 +7,12 @@ const filters = {
 
 renderTodos(todos, filters);
 
-document.querySelector('#search-text').addEventListener('input', function(e){
+document.querySelector('#search-text').addEventListener('input',(e) => {
     filters.searchText = e.target.value;
     renderTodos(todos,filters);
 });
 
-document.querySelector('#add-new-todos').addEventListener('submit', function(e){
+document.querySelector('#add-new-todos').addEventListener('submit', (e) => {
     const text = e.target.elements.newTodo.value.trim();
     debugger;
     e.preventDefault();
@@ -28,7 +28,7 @@ document.querySelector('#add-new-todos').addEventListener('submit', function(e){
     };
 });
 
-document.querySelector('#hide-complete').addEventListener('change', function(e){
+document.querySelector('#hide-complete').addEventListener('change', (e) => {
     filters.hideCompleted = e.target.checked;
     renderTodos(todos, filters);
 });

@@ -1,5 +1,5 @@
 // Fetch existing todos from localStorage
-const getSavedTodos = function(){
+const getSavedTodos = () => {
     const todoJSON = localStorage.getItem('todos');
     if(todoJSON !== null){
         return JSON.parse(todoJSON);
@@ -9,15 +9,13 @@ const getSavedTodos = function(){
 }
 
 // Save todos to localStorage
-const saveTodos = function(todos){
+const saveTodos = (todos) => {
    localStorage.setItem('todos', JSON.stringify(todos))
 }
 
 // Remove a todo based on uuid 
 const removeTodo = function(id){
-    const findTodo = todos.findIndex(function(todo){
-        return todo.id === id;
-    })
+    const findTodo = todos.findIndex((todo) => todo.id === id);
     if(findTodo > -1){
         todos.splice(findTodo, 1);
     };
@@ -25,25 +23,21 @@ const removeTodo = function(id){
 
 // Toggle the completed value for a given todo
 const toggleTodo = function(id){
-    const todo = todos.find(function(todo){
-        return todo.id === id;
-    });
+    const todo = todos.find((todo) => todo.id === id);
     if(todo !== undefined){
         todo.completed = !todo.completed
     };
 };
 
 // Render application todos based on filters
-const renderTodos = function(todos, filters){
+const renderTodos = (todos, filters) => {
     const todoEl = document.querySelector('#todos');
-    const filteredTodos = todos.filter(function(todo){
+    const filteredTodos = todos.filter((todo) => {
         const searchTextMatch = todo.text.toLowerCase().includes(filters.searchText.toLowerCase());
         const hideCompletedMatch = !filters.hideCompleted || !todo.completed;
         return searchTextMatch && hideCompletedMatch;
     })
-    const incompleteTodos = filteredTodos.filter(function(todo){
-        return !todo.completed
-      });
+    const incompleteTodos = filteredTodos.filter((todo) => !todo.completed);
 
     todoEl.innerHTML = '';
     todoEl.appendChild(generateSummaryDOM(incompleteTodos));
