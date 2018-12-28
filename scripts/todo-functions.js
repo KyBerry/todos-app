@@ -1,7 +1,13 @@
+'use strict'
+
 // Fetch existing todos from localStorage
 const getSavedTodos = () => {
     const todoJSON = localStorage.getItem('todos');
-    return todoJSON !== null ? JSON.parse(todoJSON) : [];
+    try {
+        return todoJSON ? JSON.parse(todoJSON) : [];
+    } catch(e) {
+        return []
+    }
 }
 
 // Save todos to localStorage
@@ -20,7 +26,7 @@ const removeTodo = function(id){
 // Toggle the completed value for a given todo
 const toggleTodo = function(id){
     const todo = todos.find((todo) => todo.id === id);
-    if(todo !== undefined){
+    if(todo){
         todo.completed = !todo.completed
     };
 };
@@ -39,7 +45,7 @@ const renderTodos = (todos, filters) => {
     todoEl.appendChild(generateSummaryDOM(incompleteTodos));
 
     // Add a p for each todo above (use text value
-    if (filteredTodos.length > 0){
+    if (filteredTodos.length){
         filteredTodos.forEach((todo) => {
             todoEl.appendChild(generateTodoDOM(todo));
         });        
